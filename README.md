@@ -1,33 +1,32 @@
 # FillPercent
 
-## О проекте
+Python/Photoshop utility для оценки заполненности PDF-макетов и изображений. Проект сочетает локальную обработку PDF, экспорт результатов в Excel и JSX-автоматизацию Adobe Photoshop.
 
-`FillPercent` — рабочая утилита для оценки заполненности макетов и изображений, в первую очередь PDF-файлов и подготовленных материалов для печати. Проект сочетает Python-обработку, экспорт результатов в Excel и автоматизацию через JSX-скрипты для Adobe Photoshop.
+## Статус аудита
 
-## Основные возможности
+`fillpercent.py` — актуальная версия. Старые варианты `fillpercent1.py`, `fillpercent2.py`, `fillpercent3s.py`, `fillpercent4s.py` удалены из текущей ветки.
 
-- извлечение изображений из PDF;
+Проект пока не готов к public release: в текущем `fillpercent.py` и `blackfill.jsx` остаются absolute local paths к Photoshop, Poppler и рабочим папкам. Это не credential, но это внутренняя локальная конфигурация. Перед публикацией нужно вынести пути в `.env`, JSON/YAML config или GUI settings и добавить safe example config.
+
+## Возможности
+
+- выбор PDF-файлов или папки через GUI;
+- запуск Photoshop JSX preprocessing;
+- извлечение страниц PDF через `pdf2image`;
 - расчёт процента заполнения по тёмным пикселям;
-- определение размеров изображения в миллиметрах;
-- сохранение результатов в Excel;
-- пакетная обработка через GUI;
-- связка с Photoshop через `blackfill.jsx`.
+- определение размера изображения в миллиметрах;
+- сохранение результатов в `fill_results.xlsx`;
+- очистка имени файла от служебных слов.
 
-## Стек и структура
+## Стек
 
-- Python
-- `tkinter`
-- `pdf2image`
-- `Pillow`
-- `numpy`
-- `openpyxl`
-- JSX для Photoshop
-
-Ключевые файлы:
-
-- `fillpercent.py` — основной GUI-сценарий;
-- `fillpercent1.py` / `fillpercent2.py` / `fillpercent3s.py` / `fillpercent4s.py` — дополнительные варианты обработки;
-- `blackfill.jsx` — Photoshop-автоматизация.
+- Python;
+- Tkinter;
+- pdf2image / Poppler;
+- Pillow;
+- NumPy;
+- openpyxl;
+- Adobe Photoshop JSX.
 
 ## Запуск
 
@@ -35,8 +34,14 @@
 python fillpercent.py
 ```
 
-Для полноценной работы могут потребоваться локально установленные Photoshop и Poppler, а пути к ним задаются прямо в коде.
+## Перед публикацией
 
-## Статус
+1. Вынести `PHOTOSHOP_EXE`, `SCRIPT_PATH`, `OUTPUT_FOLDER`, `POPPER_PATH` из кода.
+2. Заменить absolute paths в `blackfill.jsx` на аргументы/config.
+3. Добавить `.gitignore` для generated Excel/log/Prints/raw outputs.
+4. Выполнить full-history secret/data/path scan.
+5. Добавить synthetic sample PDF и screenshot/GIF.
 
-Рабочая производственная утилита. Проект выглядит как прикладной инструмент для внутреннего или полуручного предпечатного процесса.
+## License recommendation
+
+MIT для собственного Python/JSX-кода после cleanup. Adobe Photoshop и Poppler используются как внешние зависимости и лицензируются отдельно.
