@@ -1,5 +1,7 @@
 # FillPercent
 
+> Public experimental source: see [PUBLICATION.md](PUBLICATION.md) for actual checks, known defects, restored modules and operational limits. Earlier audit decisions are historical.
+
 Python/Photoshop utility для оценки заполненности PDF-макетов и изображений. Проект сочетает локальную обработку PDF, экспорт результатов в Excel и JSX-автоматизацию Adobe Photoshop.
 
 ## Статус аудита
